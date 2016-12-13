@@ -21,6 +21,11 @@ class TopicsController < ApplicationController
   def edit
   end
 
+  # GET /topics/1/about
+  def about
+        redirect_to(topics_path)
+  end
+
   # POST /topics
   # POST /topics.json
   def create
@@ -64,6 +69,12 @@ class TopicsController < ApplicationController
   def upvote
     @topic = Topic.find(params[:id])
     @topic.votes.create
+    redirect_to(topics_path)
+  end
+
+  def ddownvote
+    @topic = Topic.find(params[:id])
+    @topic.votes.last.destroy
     redirect_to(topics_path)
   end
 
